@@ -1,7 +1,7 @@
 package hu.ulyssys.java.course.converter;
 
-import hu.ulyssys.java.course.entity.Courier;
-import hu.ulyssys.java.course.service.CourierService;
+import hu.ulyssys.java.course.entity.Furniture;
+import hu.ulyssys.java.course.service.FurnitureService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.component.UIComponent;
@@ -12,10 +12,10 @@ import javax.inject.Named;
 
 @Named
 @ApplicationScoped
-public class CourierConverter implements Converter {
+public class FurnitureConverter implements Converter {
 
     @Inject
-    private CourierService courierService;
+    private FurnitureService furnitureService;
 
 
     @Override
@@ -23,13 +23,13 @@ public class CourierConverter implements Converter {
         if (s == null) {
             return null;
         }
-        return courierService.findByName(s);
+        return furnitureService.findByName(s);
     }
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object o) {
-        if (o instanceof Courier) {
-            return ((Courier) o).getFirstName();
+        if (o instanceof Furniture) {
+            return ((Furniture) o).getName();
         }
         if (o instanceof String) {
             return o.toString();

@@ -14,28 +14,33 @@ public class Order extends AbstractProperty{
     @Column(name = "delivery_date",nullable = false)
     private Date deliveryDate;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "courier_id", nullable = false)
     private Courier courier;
 
-    @OneToMany(fetch=FetchType.LAZY)
-    @JoinColumn(name = "furnitures_id")
-    @Min(value = 1)
+    //@OneToMany(fetch = FetchType.EAGER) ezzel nagyjából jó
+    //---------------------------------------------------------
+    //@OneToMany(fetch = FetchType.LAZY)
+    //@ManyToMany(fetch = FetchType.EAGER)
+    //@ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "furniture_id")
+    //@Min(value = 1)
     private List<Furniture> furnitures;
 
     @Column(name = "settlement",nullable = false)
-    @Max(value = 200)
+    //@Max(value = 200)
     private String settlement;
 
     @Column(name = "public_place",nullable = false)
-    @Max(value = 200)
+    //@Max(value = 200)
     private String publicPlace;
 
     @Column(name = "public_place_type",nullable = false)
     private String publicPlaceType;
 
     @Column(name = "house_of_number",nullable = false)
-    @Max(value = 200)
+    //@Max(value = 200)
     private String houseOfNumber;
 
 

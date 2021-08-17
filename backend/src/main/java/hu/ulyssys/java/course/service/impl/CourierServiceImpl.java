@@ -6,6 +6,7 @@ import hu.ulyssys.java.course.service.CourierService;
 
 import javax.ejb.Stateless;
 
+
 @Stateless
 public class CourierServiceImpl extends CoreServiceImpl<Courier> implements CourierService {
 
@@ -13,4 +14,5 @@ public class CourierServiceImpl extends CoreServiceImpl<Courier> implements Cour
     public Courier findByName(String name) {
         return ((CourierDAO) dao).findByName(name);
     }
+
 }

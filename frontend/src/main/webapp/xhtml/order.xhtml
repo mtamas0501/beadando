@@ -50,10 +50,11 @@
                           filterMatchMode="contains">
                     <h:outputText value="#{order.deliveryDate}"/>
                 </p:column>
-                <!-- <p:column sortBy="#{order.courier.firstName}" filterBy="#{order.courier.firstName}"
-                          headerText="Futár neve" filterMatchMode="contains">
-                    <h:outputText value="#{order.courier.firstName}"/>
-                </p:column> -->
+                <p:column sortBy="#{order.courier.lastName} #{order.courier.firstName}"
+                          filterBy="#{order.courier.lastName} #{order.courier.firstName}" filterMatchMode="contains"
+                          headerText="Futár">
+                    <h:outputText value="#{order.courier.lastName} #{order.courier.firstName}"/>
+                </p:column>
                 <p:column sortBy="#{order.furnitures}" filterBy="#{order.furnitures}" headerText="Bútorok"
                           filterMatchMode="contains">
                     <h:outputText value="#{order.furnitures}"/>
@@ -89,8 +90,14 @@
                 <p:panelGrid layout="grid" columns="2" id="formPanel" style="width: 400px">
 
                     <p:outputLabel value="Kiszállítás dátuma"/>
-                    <p:inputText value="#{orderCRUDMbean.selectedEntity.deliveryDate}" required="true"
-                                 requiredMessage="Kiszállítás dátuma kötelező"/>
+                    <p:datePicker id="basic" value="#{orderCRUDMbean.selectedEntity.deliveryDate}" showTime="true"/>
+
+                    <p:outputLabel value="Futár"/>
+                    <p:selectOneMenu value="#{orderCRUDMbean.selectedEntity.courier}" converter="#{courierConverter}">
+                        <f:selectItem itemValue="#{null}" itemLabel="Kérem válasszon"/>
+                        <f:selectItems value="#{courierCRUDMbean.list}" var="courier"
+                                       itemLabel="#{courier.firstName} #{courier.lastName}" itemValue="#{courier}"/>
+                    </p:selectOneMenu>
 
                     <p:outputLabel value="Település"/>
                     <p:inputText value="#{orderCRUDMbean.selectedEntity.settlement}" required="true"
@@ -111,6 +118,17 @@
                     <p:outputLabel value="Házszám"/>
                     <p:inputText value="#{orderCRUDMbean.selectedEntity.houseOfNumber}" required="true"
                                  requiredMessage="Házszám"/>
+
+                    <p:outputLabel value="Bútorok"/>
+                    <p:selectManyMenu id="advanced" collectionType="java.util.ArrayList" value="#{orderCRUDMbean.selectedEntity.furnitures}" converter="#{furnitureConverter}"
+                                      var="c" filter="true" filterMatchMode="contains" showCheckbox="true"
+                                      styleClass="manymenu-advanced" style="height: 5px">
+                        <f:selectItems value="#{furnitureCRUDMbean.list}" var="furniture" itemLabel="#{furniture.name}"
+                                       itemValue="#{furniture}"/>
+                        <p:column>
+                            <h:outputText value="#{c.name}"/>
+                        </p:column>
+                    </p:selectManyMenu>
 
                     <p:commandButton value="Mentés" icon="pi pi-save" actionListener="#{orderCRUDMbean.save()}"
                                      process="formPanel" update=":form"/>

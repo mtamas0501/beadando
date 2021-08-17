@@ -69,13 +69,6 @@
         <p:dialog id="courierDialog" widgetVar="courierDialog" header="Form" modal="true" closable="true">
             <h:form id="courierForm">
                 <p:panelGrid layout="grid" columns="2" id="formPanel" style="width: 400px">
-                    <p:outputLabel value="Létrehozás dátuma"/>
-                    <p:inputText value="#{courierCRUDMbean.selectedEntity.createdDate}" required="true"
-                                 requiredMessage="Létrehozás dátuma kötelező"/>
-
-                    <p:outputLabel value="Létrehozó felhasználó"/>
-                    <p:inputText value="#{courierCRUDMbean.selectedEntity.creatorUser}" required="true"
-                                 requiredMessage="Létrehozó felhasználó kötelező"/>
 
                     <p:outputLabel value="Keresztnév"/>
                     <p:inputText value="#{courierCRUDMbean.selectedEntity.firstName}" required="true"

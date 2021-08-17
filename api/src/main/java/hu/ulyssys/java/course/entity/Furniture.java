@@ -10,10 +10,10 @@ import javax.validation.constraints.Max;
 public class Furniture extends AbstractProperty{
 
     @Column(name = "name",nullable = false)
-    @Max(value = 200)
+    //@Max(value = 200)
     private String name;
     @Column(name = "description",nullable = false)
-    @Max(value = 500)
+    //@Max(value = 500)
     private String description;
     @Column(name = "price",nullable = false)
     private Integer price;

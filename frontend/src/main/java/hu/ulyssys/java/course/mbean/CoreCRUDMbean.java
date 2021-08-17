@@ -34,7 +34,6 @@ public abstract class CoreCRUDMbean<T extends AbstractEntity> implements Seriali
                 list = service.getAll();
                 selectedEntity = initNewEntity();
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sikeres mentés"));
-
             } else {
                 service.update(selectedEntity);
                 list = service.getAll();

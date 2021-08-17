@@ -2,7 +2,8 @@ package hu.ulyssys.java.course.service;
 
 import hu.ulyssys.java.course.entity.AbstractEntity;
 
-import javax.ejb.Singleton;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -16,4 +17,5 @@ public interface CoreService<T extends AbstractEntity> {
     void remove(T entity);
 
     void update(T entity);
+
 }

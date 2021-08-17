@@ -20,7 +20,7 @@ public class CourierDAOImpl extends CoreDAOImpl<Courier> implements CourierDAO {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Courier> criteriaQuery = criteriaBuilder.createQuery(Courier.class);
         Root<Courier> root = criteriaQuery.from(Courier.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("fullName"), name));
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("firstName"), name));
         TypedQuery<Courier> query = entityManager.createQuery(criteriaQuery);
 
         //TypedQuery<Farmer> query = entityManager.createQuery("select f from Farmer f where f.fullName=:name", Farmer.class);
