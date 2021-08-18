@@ -12,10 +12,10 @@ import java.util.Objects;
 public class Courier extends AbstractProperty {
 
     @Column(name = "first_name",nullable = false)
-    //@Max(value = 500)
+    @Max(value = 500)
     private String firstName;
     @Column(name = "last_name",nullable = false)
-    //@Max(value = 500)
+    @Max(value = 500)
     private String lastName;
     @Column(name = "telephone_number",nullable = false)
     private Integer telephoneNumber;

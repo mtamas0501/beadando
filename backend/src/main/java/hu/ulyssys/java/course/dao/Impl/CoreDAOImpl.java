@@ -39,6 +39,5 @@ public abstract class CoreDAOImpl<T extends AbstractEntity> implements CoreDAO<T
         entityManager.remove(findById(id));
     }
 
-    //Reflectionnel el lehet kérni
     protected abstract Class<T> getManagedClass();
 }

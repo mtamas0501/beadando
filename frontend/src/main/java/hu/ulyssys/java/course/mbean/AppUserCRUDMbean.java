@@ -12,6 +12,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Date;
 
 @Named
 @ViewScoped
@@ -37,6 +38,7 @@ public class AppUserCRUDMbean extends CoreCRUDMbean<AppUser> implements Serializ
         try {
             if (getSelectedEntity().getId() == null) {
                 getSelectedEntity().setPasswordHash(hashPassword(getSelectedEntity().getPasswordHash()));
+                getSelectedEntity().setCreatedDate(new Date());
             }
             super.save();
         } catch (Exception e) {

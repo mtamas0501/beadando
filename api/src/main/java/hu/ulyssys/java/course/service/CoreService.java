@@ -3,7 +3,7 @@ package hu.ulyssys.java.course.service;
 import hu.ulyssys.java.course.entity.AbstractEntity;
 
 
-import java.util.Date;
+
 import java.util.List;
 
 

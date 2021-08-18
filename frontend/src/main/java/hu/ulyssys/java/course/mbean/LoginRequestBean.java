@@ -12,6 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Date;
 
 @Named
 @RequestScoped
@@ -40,6 +41,7 @@ public class LoginRequestBean {
             loggedInUserModel.setUsername(appUser.getUsername());
             loggedInUserModel.setId(appUser.getId());
             loggedInUserModel.setRole(appUser.getRole());
+            //loggedInUserModel.setCreatedDate(new Date());
             loggedInUserModel.setCreatedDate(appUser.getCreatedDate());
             bean.setModel(loggedInUserModel);
             PrimeFaces.current().executeScript("PF('loginDialog').hide()");

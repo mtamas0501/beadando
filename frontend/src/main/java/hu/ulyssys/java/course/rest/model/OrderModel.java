@@ -1,44 +1,28 @@
-package hu.ulyssys.java.course.entity;
+package hu.ulyssys.java.course.rest.model;
 
+import hu.ulyssys.java.course.entity.Courier;
+import hu.ulyssys.java.course.entity.Furniture;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "order_furniture")
-public class Order extends AbstractProperty{
+public class OrderModel extends CoreRestModel{
 
-    @Column(name = "delivery_date",nullable = false)
     private Date deliveryDate;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "courier_id", nullable = false)
     private Courier courier;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    //@JoinColumn(name = "furniture_id")
-    @Min(value = 1)
-    private List<Furniture> furnitures  = new ArrayList<>();
+    private List<Furniture> furnitures = new ArrayList<>();
 
-    @Column(name = "settlement",nullable = false)
-    @Max(value = 200)
     private String settlement;
 
-    @Column(name = "public_place",nullable = false)
-    @Max(value = 200)
     private String publicPlace;
 
-    @Column(name = "public_place_type",nullable = false)
     private String publicPlaceType;
 
-    @Column(name = "house_of_number",nullable = false)
-    @Max(value = 200)
     private String houseOfNumber;
-
 
     public Date getDeliveryDate() {
         return deliveryDate;
@@ -49,11 +33,11 @@ public class Order extends AbstractProperty{
     }
 
     public Courier getCourier() {
-       return courier;
+        return courier;
     }
 
     public void setCourier(Courier courier) {
-       this.courier = courier;
+        this.courier = courier;
     }
 
     public List<Furniture> getFurnitures() {

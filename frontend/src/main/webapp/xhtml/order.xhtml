@@ -120,8 +120,8 @@
                                  requiredMessage="Házszám"/>
 
                     <p:outputLabel value="Bútorok"/>
-                    <p:selectManyMenu id="advanced" collectionType="java.util.ArrayList" value="#{orderCRUDMbean.selectedEntity.furnitures}" converter="#{furnitureConverter}"
-                                      var="c" filter="true" filterMatchMode="contains" showCheckbox="true"
+                    <p:selectManyMenu id="advanced" value="#{orderCRUDMbean.selectedEntity.furnitures}" converter="#{furnitureConverter}"
+                                      var="c" filter="true" filterMatchMode="contains" showCheckbox="true" collectionType="java.util.ArrayList"
                                       styleClass="manymenu-advanced" style="height: 5px">
                         <f:selectItems value="#{furnitureCRUDMbean.list}" var="furniture" itemLabel="#{furniture.name}"
                                        itemValue="#{furniture}"/>

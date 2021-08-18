@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
+import java.util.Objects;
 
 @Entity
 @Table(name = "furniture")
@@ -42,4 +43,16 @@ public class Furniture extends AbstractProperty{
         this.price = price;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Furniture furniture = (Furniture) o;
+        return Objects.equals(name, furniture.name) && Objects.equals(description, furniture.description) && Objects.equals(price, furniture.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, price);
+    }
 }

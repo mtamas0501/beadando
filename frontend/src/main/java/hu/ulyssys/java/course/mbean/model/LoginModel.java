@@ -1,7 +1,5 @@
 package hu.ulyssys.java.course.mbean.model;
 
-import java.util.Date;
-
 public class LoginModel {
 
     private String username;
