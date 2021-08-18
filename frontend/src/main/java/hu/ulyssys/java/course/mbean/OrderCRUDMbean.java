@@ -1,9 +1,11 @@
 package hu.ulyssys.java.course.mbean;
 
+
+import hu.ulyssys.java.course.entity.Furniture;
 import hu.ulyssys.java.course.entity.Order;
 import hu.ulyssys.java.course.service.CoreService;
 import hu.ulyssys.java.course.service.CourierService;
-import hu.ulyssys.java.course.service.OrderService;
+import hu.ulyssys.java.course.service.FurnitureService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -12,14 +14,15 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Named
 @ViewScoped
-public class OrderCRUDMbean extends CourierAwareCRUDMbean<Order> implements Serializable {
+public class OrderCRUDMbean extends AwareCRUDMbean<Order> implements Serializable {
 
     @Inject
-    public OrderCRUDMbean(CoreService<Order> service, CourierService courierService) {
-        super(service, courierService);
+    public OrderCRUDMbean(CoreService<Order> service, CourierService courierService, FurnitureService furnitureService) {
+        super(service, courierService,furnitureService);
     }
 
     @Override
@@ -46,4 +49,5 @@ public class OrderCRUDMbean extends CourierAwareCRUDMbean<Order> implements Seri
     protected Order initNewEntity() {
         return new Order();
     }
+
 }

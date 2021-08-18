@@ -55,7 +55,7 @@
                           headerText="Futár">
                     <h:outputText value="#{order.courier.lastName} #{order.courier.firstName}"/>
                 </p:column>
-                <p:column sortBy="#{order.furnitures}" filterBy="#{order.furnitures}" headerText="Bútorok"
+                <p:column sortBy="#{order.furnitures}" filterBy="#{order.furnitures.name}" headerText="Bútorok"
                           filterMatchMode="contains">
                     <h:outputText value="#{order.furnitures}"/>
                 </p:column>
@@ -95,8 +95,8 @@
                     <p:outputLabel value="Futár"/>
                     <p:selectOneMenu value="#{orderCRUDMbean.selectedEntity.courier}" converter="#{courierConverter}">
                         <f:selectItem itemValue="#{null}" itemLabel="Kérem válasszon"/>
-                        <f:selectItems value="#{courierCRUDMbean.list}" var="courier"
-                                       itemLabel="#{courier.firstName} #{courier.lastName}" itemValue="#{courier}"/>
+                        <f:selectItems value="#{orderCRUDMbean.courierList}" var="courier"
+                                       itemLabel="#{courier.lastName} #{courier.firstName}" itemValue="#{courier}"/>
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Település"/>
@@ -123,7 +123,7 @@
                     <p:selectManyMenu id="advanced" value="#{orderCRUDMbean.selectedEntity.furnitures}" converter="#{furnitureConverter}"
                                       var="c" filter="true" filterMatchMode="contains" showCheckbox="true" collectionType="java.util.ArrayList"
                                       styleClass="manymenu-advanced" style="height: 5px">
-                        <f:selectItems value="#{furnitureCRUDMbean.list}" var="furniture" itemLabel="#{furniture.name}"
+                        <f:selectItems value="#{orderCRUDMbean.furnitureList}" var="furniture" itemLabel="#{furniture.name}"
                                        itemValue="#{furniture}"/>
                         <p:column>
                             <h:outputText value="#{c.name}"/>

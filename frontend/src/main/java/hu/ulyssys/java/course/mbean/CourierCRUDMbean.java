@@ -1,5 +1,6 @@
 package hu.ulyssys.java.course.mbean;
 
+import hu.ulyssys.java.course.entity.AppUser;
 import hu.ulyssys.java.course.entity.Courier;
 import hu.ulyssys.java.course.service.CourierService;
 
@@ -15,6 +16,7 @@ import java.util.Date;
 @ViewScoped
 public class CourierCRUDMbean extends CoreCRUDMbean<Courier> implements Serializable {
 
+    private AppUser member;
 
     @Inject
     public CourierCRUDMbean(CourierService courierService) {
@@ -31,8 +33,10 @@ public class CourierCRUDMbean extends CoreCRUDMbean<Courier> implements Serializ
         try {
             if (getSelectedEntity().getId() == null) {
                 getSelectedEntity().setCreatedDate(new Date());
+                //getSelectedEntity().setCreatorUser(member);
             } else {
                 getSelectedEntity().setModifiedDate(new Date());
+                //getSelectedEntity().setModifierUser(member);
             }
             super.save();
         } catch (Exception e) {

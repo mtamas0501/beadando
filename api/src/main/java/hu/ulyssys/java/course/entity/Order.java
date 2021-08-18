@@ -20,23 +20,22 @@ public class Order extends AbstractProperty{
     private Courier courier;
 
     @OneToMany(fetch = FetchType.EAGER)
-    //@JoinColumn(name = "furniture_id")
-    @Min(value = 1)
+    //@Min(value = 1)
     private List<Furniture> furnitures  = new ArrayList<>();
 
     @Column(name = "settlement",nullable = false)
-    @Max(value = 200)
+    //@Max(value = 200)
     private String settlement;
 
     @Column(name = "public_place",nullable = false)
-    @Max(value = 200)
+    //@Max(value = 200)
     private String publicPlace;
 
     @Column(name = "public_place_type",nullable = false)
     private String publicPlaceType;
 
     @Column(name = "house_of_number",nullable = false)
-    @Max(value = 200)
+    //@Max(value = 200)
     private String houseOfNumber;
 
 

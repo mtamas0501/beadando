@@ -4,17 +4,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
 @Table(name = "furniture")
 public class Furniture extends AbstractProperty{
 
-    @Column(name = "name",nullable = false)
-    //@Max(value = 200)
+    //@Max(200)
+    @Column(name = "name")
     private String name;
-    @Column(name = "description",nullable = false)
-    //@Max(value = 500)
+    //@Max(500)
+    @Column(name = "description")
     private String description;
     @Column(name = "price",nullable = false)
     private Integer price;

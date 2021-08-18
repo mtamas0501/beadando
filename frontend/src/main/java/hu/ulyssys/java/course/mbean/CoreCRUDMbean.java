@@ -16,6 +16,8 @@ public abstract class CoreCRUDMbean<T extends AbstractEntity> implements Seriali
     private List<T> list;
     private T selectedEntity;
 
+    private T loginMember;
+
     protected CoreService<T> service;
 
     public CoreCRUDMbean(CoreService<T> service) {
