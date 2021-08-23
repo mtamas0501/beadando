@@ -41,22 +41,22 @@
                 <p:column sortBy="#{furniture.createdDate}" filterBy="#{furniture.createdDate}" filterMatchMode="contains"
                           headerText="Létrehozás dátuma" rendered="#{loggedInUserBean.isAdmin()}">
                     <h:outputText value="#{furniture.createdDate}">
-                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm:ss" />
+                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" timeZone="Europe/Budapest"/>
                     </h:outputText>
                 </p:column>
                 <p:column sortBy="#{furniture.modifiedDate}" filterBy="#{furniture.modifiedDate}" filterMatchMode="contains"
                           headerText="Utolsó módosítás dátuma" rendered="#{loggedInUserBean.isAdmin()}">
                     <h:outputText value="#{furniture.modifiedDate}">
-                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm:ss" />
+                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" timeZone="Europe/Budapest"/>
                     </h:outputText>
                 </p:column>
-                <p:column sortBy="#{furniture.createdBy.userName}" filterBy="#{furniture.createdBy.userName}" filterMatchMode="contains"
+                <p:column sortBy="#{furniture.createdUser.userName}" filterBy="#{furniture.createdUser.userName}" filterMatchMode="contains"
                           headerText="Létrehozó felhasználó" rendered="#{loggedInUserBean.isAdmin()}">
-                    <h:outputText value="#{furniture.createdBy.userName}"/>
+                    <h:outputText value="#{furniture.createdUser.userName}"/>
                 </p:column>
-                <p:column sortBy="#{furniture.modifiedBy.userName}" filterBy="#{furniture.modifiedBy.userName}" filterMatchMode="contains"
+                <p:column sortBy="#{furniture.modifiedUser.userName}" filterBy="#{furniture.modifiedUser.userName}" filterMatchMode="contains"
                           headerText="Utolsó módosító felhasználó" rendered="#{loggedInUserBean.isAdmin()}">
-                    <h:outputText value="#{furniture.modifiedBy.userName}"/>
+                    <h:outputText value="#{furniture.modifiedUser.userName}"/>
                 </p:column>
                 <p:rowExpansion>
                     <h3>

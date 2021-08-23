@@ -47,7 +47,7 @@ public class OrderCRUDMbean extends AwareCRUDMbean<Order> implements Serializabl
     @Override
     protected void refreshData() {
         if (!loggedInUserBean.isAdmin()) {
-            setList(orderService.getAll().stream().filter(order -> order.getCreatedBy().getUserName().equals(loggedInUserBean.getModel().getUsername())).collect(Collectors.toList()));
+            setList(orderService.getAll().stream().filter(order -> order.getCreatedUser().getUserName().equals(loggedInUserBean.getModel().getUsername())).collect(Collectors.toList()));
         }else {
             setList(orderService.getAll());
         }

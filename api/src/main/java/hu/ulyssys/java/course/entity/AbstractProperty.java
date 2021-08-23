@@ -13,11 +13,11 @@ public abstract class AbstractProperty extends AbstractEntity{
 
     @JoinColumn(name = "created_user_id")
     @ManyToOne
-    private AppUser createdBy;
+    private AppUser createdUser;
 
     @JoinColumn(name = "modified_user_id")
     @ManyToOne
-    private AppUser modifiedBy;
+    private AppUser modifiedUser;
 
     public Date getModifiedDate() {
         return modifiedDate;
@@ -27,19 +27,19 @@ public abstract class AbstractProperty extends AbstractEntity{
         this.modifiedDate = modifiedDate;
     }
 
-    public AppUser getCreatedBy() {
-        return createdBy;
+    public AppUser getCreatedUser() {
+        return createdUser;
     }
 
-    public void setCreatedBy(AppUser createdBy) {
-        this.createdBy = createdBy;
+    public void setCreatedUser(AppUser createdUser) {
+        this.createdUser = createdUser;
     }
 
-    public AppUser getModifiedBy() {
-        return modifiedBy;
+    public AppUser getModifiedUser() {
+        return modifiedUser;
     }
 
-    public void setModifiedBy(AppUser modifiedBy) {
-        this.modifiedBy = modifiedBy;
+    public void setModifiedUser(AppUser modifiedUser) {
+        this.modifiedUser = modifiedUser;
     }
 }

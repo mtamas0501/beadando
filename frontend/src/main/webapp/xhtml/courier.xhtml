@@ -30,11 +30,11 @@
                           headerText="ID">
                     <h:outputText value="#{courier.id}"/>
                 </p:column>
-                <p:column sortBy="#{courier.firstName}" filterBy="#{courier.firstName}" filterMatchMode="contains" headerText="Keresztnév">
-                    <h:outputText value="#{courier.firstName}"/>
-                </p:column>
                 <p:column sortBy="#{courier.lastName}" filterBy="#{courier.lastName}" filterMatchMode="contains" headerText="Vezetéknév">
                     <h:outputText value="#{courier.lastName}"/>
+                </p:column>
+                <p:column sortBy="#{courier.firstName}" filterBy="#{courier.firstName}" filterMatchMode="contains" headerText="Keresztnév">
+                    <h:outputText value="#{courier.firstName}"/>
                 </p:column>
                 <p:column sortBy="#{courier.phoneNumber}" filterBy="#{courier.phoneNumber}" filterMatchMode="contains"
                           headerText="Telefon szám">
@@ -43,22 +43,22 @@
                 <p:column sortBy="#{courier.createdDate}" filterBy="#{courier.createdDate}" filterMatchMode="contains"
                           headerText="Létrehozás dátuma">
                     <h:outputText value="#{courier.createdDate}">
-                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" timeZone="Europe/Budapest"/>
                     </h:outputText>
                 </p:column>
                 <p:column sortBy="#{courier.modifiedDate}" filterBy="#{courier.modifiedDate}" filterMatchMode="contains"
                           headerText="Utolsó módosítás dátuma">
                     <h:outputText value="#{courier.modifiedDate}">
-                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" timeZone="Europe/Budapest"/>
                     </h:outputText>
                 </p:column>
-                <p:column sortBy="#{courier.createdBy.userName}" filterBy="#{courier.createdBy.userName}" filterMatchMode="contains"
+                <p:column sortBy="#{courier.createdUser.userName}" filterBy="#{courier.createdUser.userName}" filterMatchMode="contains"
                           headerText="Létrehozó felhasználó" rendered="#{loggedInUserBean.isAdmin()}">
-                    <h:outputText value="#{courier.createdBy.userName}"/>
+                    <h:outputText value="#{courier.createdUser.userName}"/>
                 </p:column>
-                <p:column sortBy="#{courier.modifiedBy.userName}" filterBy="#{courier.modifiedBy.userName}" filterMatchMode="contains"
+                <p:column sortBy="#{courier.modifiedUser.userName}" filterBy="#{courier.modifiedUser.userName}" filterMatchMode="contains"
                           headerText="Utolsó módosító felhasználó" rendered="#{loggedInUserBean.isAdmin()}">
-                    <h:outputText value="#{courier.modifiedBy.userName}"/>
+                    <h:outputText value="#{courier.modifiedUser.userName}"/>
                 </p:column>
             </p:dataTable>
 
@@ -74,13 +74,13 @@
         <p:dialog id="courierDialog" widgetVar="courierDialog" header="Futár" modal="true" closable="true">
             <h:form id="courierForm">
                 <p:panelGrid layout="grid" columns="2" id="formPanel" style="width:450px">
-                    <p:outputLabel value="Keresztnév"/>
-                    <p:inputText required="true" requiredMessage="Keresztnév kötelező"
-                                 value="#{courierCRUDMbean.selectedEntity.firstName}"/>
-
                     <p:outputLabel value="Vezetéknév"/>
                     <p:inputText required="true" requiredMessage="Vezetéknév kötelező"
                                  value="#{courierCRUDMbean.selectedEntity.lastName}"/>
+
+                    <p:outputLabel value="Keresztnév"/>
+                    <p:inputText required="true" requiredMessage="Keresztnév kötelező"
+                                 value="#{courierCRUDMbean.selectedEntity.firstName}"/>
 
                     <p:outputLabel value="Telefon szám"/>
                     <p:inputText id="regex" requiredMessage="Telefon szám kötelező"

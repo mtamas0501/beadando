@@ -24,7 +24,6 @@ public class CourierConverter implements Converter {
         }
         String[] names = s.split(" ");
         return courierService.findByUserName(names[0], names[1]);
-
     }
 
     @Override

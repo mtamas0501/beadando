@@ -3,7 +3,7 @@ Accept: application/json
 
 ###
 
-GET http://localhost:8080/api/order/2
+GET http://localhost:8080/api/order/23
 Accept: application/json
 
 ###
@@ -33,7 +33,7 @@ PUT http://localhost:8080/api/order
 Content-Type: application/json
 
 {
-  "id": 16,
+  "id": 28,
   "createdById": 1,
   "modifiedById": 1,
   "createdDate": "2010-11-16T04:25:03Z",
@@ -52,7 +52,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/api/order/16
+DELETE http://localhost:8080/api/order/26
 Accept: application/json
 
 ###

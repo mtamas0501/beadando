@@ -8,7 +8,7 @@ import javax.persistence.Table;
 public class MenuItem extends AbstractEntity{
     private String url;
     private String label;
-    private Boolean onlyAdminCanSee;
+    private Boolean adminFunction;
 
     public String getUrl() {
         return url;
@@ -26,12 +26,12 @@ public class MenuItem extends AbstractEntity{
         this.label = label;
     }
 
-    public Boolean getOnlyAdminCanSee() {
-        return onlyAdminCanSee;
+    public Boolean getAdminFunction() {
+        return adminFunction;
     }
 
-    public void setOnlyAdminCanSee(Boolean onlyAdminCanSee) {
-        this.onlyAdminCanSee = onlyAdminCanSee;
+    public void setAdminFunction(Boolean adminFunction) {
+        this.adminFunction = adminFunction;
     }
 }
 

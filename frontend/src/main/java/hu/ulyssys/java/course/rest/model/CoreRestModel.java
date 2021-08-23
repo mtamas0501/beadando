@@ -12,9 +12,9 @@ public abstract class CoreRestModel {
     @PastOrPresent
     private Date modifiedDate;
 
-    private Long createdById;
+    private Long createdUserById;
 
-    private Long modifiedById;
+    private Long modifiedUserById;
 
     public Long getId() {
         return id;
@@ -40,19 +40,19 @@ public abstract class CoreRestModel {
         this.modifiedDate = modifiedDate;
     }
 
-    public Long getCreatedById() {
-        return createdById;
+    public Long getCreatedUserById() {
+        return createdUserById;
     }
 
-    public void setCreatedById(Long createdById) {
-        this.createdById = createdById;
+    public void setCreatedUserById(Long createdUserById) {
+        this.createdUserById = createdUserById;
     }
 
-    public Long getModifiedById() {
-        return modifiedById;
+    public Long getModifiedUserById() {
+        return modifiedUserById;
     }
 
-    public void setModifiedById(Long modifiedById) {
-        this.modifiedById = modifiedById;
+    public void setModifiedUserById(Long modifiedUserById) {
+        this.modifiedUserById = modifiedUserById;
     }
 }

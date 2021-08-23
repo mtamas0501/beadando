@@ -30,7 +30,6 @@ public class LoginRequestBean {
 
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/xhtml/order.xhtml");
-            //Ha sikeres a login
             AppUser appUser = userService.findByUserName(model.getUsername());
             if (appUser == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hibás jelszó vagy felhasználónév", ""));
@@ -46,7 +45,6 @@ public class LoginRequestBean {
             bean.setModel(loggedInUserModel);
             PrimeFaces.current().executeScript("PF('loginDialog').hide()");
             PrimeFaces.current().executeScript("PF('registrationDialog').hide()");
-            //Akkor  sessionbe beállítjuk a usert reprezentáló modelt.
         } catch (Exception e) {
             e.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "sikertelen bejelentkezés", ""));

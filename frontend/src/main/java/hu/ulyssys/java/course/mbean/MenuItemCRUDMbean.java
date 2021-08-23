@@ -26,7 +26,7 @@ public class MenuItemCRUDMbean extends CoreCRUDMbean<MenuItem> implements Serial
 
     @Override
     protected String dialogName() {
-        return "menuDialog";
+        return "menuItemDialog";
     }
 
     @Override

@@ -2,7 +2,7 @@ package hu.ulyssys.java.course.rest;
 
 import hu.ulyssys.java.course.entity.Furniture;
 import hu.ulyssys.java.course.rest.model.FurnitureModel;
-import hu.ulyssys.java.course.util.FurnitureModelMapperBean;
+import hu.ulyssys.java.course.mapperbeans.FurnitureModelMapperBean;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;

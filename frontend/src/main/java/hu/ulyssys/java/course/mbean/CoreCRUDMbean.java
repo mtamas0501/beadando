@@ -1,15 +1,11 @@
 package hu.ulyssys.java.course.mbean;
 
 import hu.ulyssys.java.course.entity.AbstractEntity;
-import hu.ulyssys.java.course.entity.MenuItem;
-import hu.ulyssys.java.course.service.AppUserService;
 import hu.ulyssys.java.course.service.CoreService;
-import hu.ulyssys.java.course.service.CourierService;
 import org.primefaces.PrimeFaces;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -43,16 +39,22 @@ public abstract class CoreCRUDMbean<T extends AbstractEntity> implements Seriali
         }
     }
 
+    public void remove() {
+        try {
+            service.remove(selectedEntity);
+            refreshData();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sikeres törlés"));
+        }catch (Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sikertelen törlés", null));
+        }
+    }
+
     protected void saveNewEntity(){
         selectedEntity.setCreatedDate(getCurrentDate());
         service.add(selectedEntity);
         refreshData();
         selectedEntity = initNewEntity();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sikeres mentés"));
-    }
-
-    protected void refreshData(){
-        setList(service.getAll());
     }
 
     protected void updateEntity(){
@@ -63,20 +65,13 @@ public abstract class CoreCRUDMbean<T extends AbstractEntity> implements Seriali
     }
 
     protected Date getCurrentDate(){
-        Date date = new Date(System.currentTimeMillis());
-        return date;
+        return new Date(System.currentTimeMillis());
     }
 
-
-    public void remove() {
-        try {
-            service.remove(selectedEntity);
-            refreshData();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sikeres törlés"));
-        }catch (Exception e){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sikertelen törlés", null));
-        }
+    protected void refreshData(){
+        setList(service.getAll());
     }
+
 
     protected abstract String dialogName();
 

@@ -56,22 +56,22 @@
                 <p:column sortBy="#{order.createdDate}" filterBy="#{order.createdDate}" filterMatchMode="contains"
                           headerText="Létrehozás dátuma" rendered="#{loggedInUserBean.isAdmin()}">
                     <h:outputText value="#{order.createdDate}">
-                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" timeZone="Europe/Budapest"/>
                     </h:outputText>
                 </p:column>
                 <p:column sortBy="#{order.modifiedDate}" filterBy="#{order.modifiedDate}" filterMatchMode="contains"
                           headerText="Utolsó módosítás dátuma" rendered="#{loggedInUserBean.isAdmin()}">
                     <h:outputText value="#{order.modifiedDate}">
-                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" timeZone="Europe/Budapest"/>
                     </h:outputText>
                 </p:column>
-                <p:column sortBy="#{order.createdBy.userName}" filterBy="#{order.createdBy.userName}" filterMatchMode="contains"
+                <p:column sortBy="#{order.createdUser.userName}" filterBy="#{order.createdUser.userName}" filterMatchMode="contains"
                           headerText="Létrehozó felhasználó" rendered="#{loggedInUserBean.isAdmin()}">
-                    <h:outputText value="#{order.createdBy.userName}"/>
+                    <h:outputText value="#{order.createdUser.userName}"/>
                 </p:column>
-                <p:column sortBy="#{order.modifiedBy.userName}" filterBy="#{order.modifiedBy.userName}" filterMatchMode="contains"
+                <p:column sortBy="#{order.modifiedUser.userName}" filterBy="#{order.modifiedUser.userName}" filterMatchMode="contains"
                           headerText="Utolsó módosító felhasználó" rendered="#{loggedInUserBean.isAdmin()}">
-                    <h:outputText value="#{order.modifiedBy.userName}"/>
+                    <h:outputText value="#{order.modifiedUser.userName}"/>
                 </p:column>
                 <p:rowExpansion>
                     <div>
@@ -128,10 +128,10 @@
                     <p:selectOneMenu value="#{orderCRUDMbean.selectedEntity.courier}" converter="#{courierConverter}"
                                      rendered="#{loggedInUserBean.isAdmin()}">
                         <f:selectItem itemValue="#{null}" itemLabel="Kérem válasszon"/>
-                        <f:selectItems value="#{orderCRUDMbean.courierList}" var="courier" itemLabel="#{courier.firstName} #{courier.lastName}" itemValue="#{courier}"/>
+                        <f:selectItems value="#{orderCRUDMbean.courierList}" var="courier" itemLabel="#{courier.lastName} #{courier.firstName}" itemValue="#{courier}"/>
                     </p:selectOneMenu>
 
-                    <p:outputLabel value="Pizzák"/>
+                    <p:outputLabel value="Bútorok"/>
                     <p:selectManyMenu required="true" requiredMessage="A bútor megadása kötelező!"
                                       id="advanced" value="#{orderCRUDMbean.selectedEntity.furnitures}"
                                       converter="#{furnitureConverter}"

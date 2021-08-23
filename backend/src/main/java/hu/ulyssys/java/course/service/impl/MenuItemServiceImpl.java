@@ -8,5 +8,4 @@ import javax.ejb.Stateless;
 @Stateless
 public class MenuItemServiceImpl extends CoreServiceImpl<MenuItem> implements MenuItemService {
 
-
 }

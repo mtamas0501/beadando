@@ -11,7 +11,7 @@ import java.util.Objects;
 @Table(name = "furniture")
 public class Furniture extends AbstractProperty {
 
-    public static  final String FIND_BY_USERNAME = "Pizza.findByUsername";
+    public static  final String FIND_BY_USERNAME = "Furniture.findByUsername";
 
     @Column(nullable = false, length = 200)
     private String name;

@@ -2,8 +2,6 @@ package hu.ulyssys.java.course.mbean;
 
 import hu.ulyssys.java.course.entity.AppUser;
 import hu.ulyssys.java.course.service.AppUserService;
-import hu.ulyssys.java.course.service.CoreService;
-import hu.ulyssys.java.course.service.MenuItemService;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.faces.application.FacesMessage;
@@ -13,7 +11,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Date;
 
 @Named
 @ViewScoped
@@ -55,20 +52,10 @@ public class AppUserCRUDMbean extends CoreCRUDMbean<AppUser> implements Serializ
 
     @Override
     public void remove() {
-        if (loggedInUserBean.getModel().getId() != selectedEntity.getId()){
+        if (!loggedInUserBean.getModel().getId().equals(selectedEntity.getId())){
             super.remove();
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nem törölheted saját magad az adatbázisból", ""));
-        }
-    }
-
-    public void registration(){
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/xhtml/furniture.xhtml");
-            save();
-        } catch (IOException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hiba történt regisztráció közben", ""));
-            e.printStackTrace();
         }
     }
 

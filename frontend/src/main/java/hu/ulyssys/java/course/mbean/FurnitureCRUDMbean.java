@@ -13,8 +13,8 @@ import java.io.Serializable;
 @ViewScoped
 public class FurnitureCRUDMbean extends AwareCRUDMbean<Furniture> implements Serializable {
     @Inject
-    public FurnitureCRUDMbean(FurnitureService pizzaService, AppUserService appUserService, LoggedInUserBean loggedInUserBean) {
-        super(pizzaService, appUserService, loggedInUserBean);
+    public FurnitureCRUDMbean(FurnitureService furnitureService, AppUserService appUserService, LoggedInUserBean loggedInUserBean) {
+        super(furnitureService, appUserService, loggedInUserBean);
         if (!loggedInUserBean.isLoggedIn()){
             throw new SecurityException("Kérünk jelentkezzen be az oldal használatához!");
         }

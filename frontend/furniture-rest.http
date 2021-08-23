@@ -22,7 +22,7 @@ PUT http://localhost:8080/api/furniture
 Content-Type: application/json
 
 {
-  "id": 7,
+  "id": 29,
   "createdById": 9,
   "modifiedById": 9,
   "createdDate": "2020-12-16T04:25:03Z",
@@ -34,7 +34,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/api/furniture/7
+DELETE http://localhost:8080/api/furniture/29
 Accept: application/json
 
 ###

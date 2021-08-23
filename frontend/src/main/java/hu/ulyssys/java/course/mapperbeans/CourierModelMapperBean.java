@@ -1,4 +1,4 @@
-package hu.ulyssys.java.course.util;
+package hu.ulyssys.java.course.mapperbeans;
 
 import hu.ulyssys.java.course.entity.Courier;
 import hu.ulyssys.java.course.rest.model.CourierModel;
@@ -11,11 +11,11 @@ public class CourierModelMapperBean extends CoreModelMapperBean<CourierModel, Co
 
     @Override
     public CourierModel createModelFromEntity(Courier entity) {
-        CourierModel furnitureModel = super.createModelFromEntity(entity);
-        furnitureModel.setFirstName(entity.getFirstName());
-        furnitureModel.setLastName(entity.getLastName());
-        furnitureModel.setPhoneNumber(entity.getPhoneNumber());
-        return furnitureModel;
+        CourierModel courierModel = super.createModelFromEntity(entity);
+        courierModel.setFirstName(entity.getFirstName());
+        courierModel.setLastName(entity.getLastName());
+        courierModel.setPhoneNumber(entity.getPhoneNumber());
+        return courierModel;
     }
 
     @Override

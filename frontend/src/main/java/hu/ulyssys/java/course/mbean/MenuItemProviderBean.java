@@ -34,7 +34,7 @@ public class MenuItemProviderBean {
         DefaultMenuItem element = new DefaultMenuItem();
         element.setHref(item.getUrl());
         element.setValue(item.getLabel());
-        if(Boolean.FALSE.equals(item.getOnlyAdminCanSee()) || item.getOnlyAdminCanSee()==null || (Boolean.TRUE.equals(item.getOnlyAdminCanSee())) && loggedInUserBean.isAdmin())
+        if(Boolean.FALSE.equals(item.getAdminFunction()) || item.getAdminFunction()==null || (Boolean.TRUE.equals(item.getAdminFunction())) && loggedInUserBean.isAdmin())
             menuModel.getElements().add(element);
     }
 }

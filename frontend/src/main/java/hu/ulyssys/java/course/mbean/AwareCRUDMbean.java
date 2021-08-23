@@ -24,7 +24,7 @@ public abstract class AwareCRUDMbean<T extends AbstractProperty> extends CoreCRU
     public void save() {
         try {
             selectedEntity.setModifiedDate(getCurrentDate());
-            selectedEntity.setModifiedBy(userList.stream().filter(u -> u.getUserName().equals(loggedInUserBean.getModel().getUsername())).findFirst().get());
+            selectedEntity.setModifiedUser(userList.stream().filter(u -> u.getUserName().equals(loggedInUserBean.getModel().getUsername())).findFirst().get());
             super.save();
         }catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hiba történt mentés közben", ""));
@@ -34,7 +34,7 @@ public abstract class AwareCRUDMbean<T extends AbstractProperty> extends CoreCRU
 
     @Override
     protected void saveNewEntity(){
-        selectedEntity.setCreatedBy(userList.stream().filter(u -> u.getUserName().equals(loggedInUserBean.getModel().getUsername())).findFirst().get());
+        selectedEntity.setCreatedUser(userList.stream().filter(u -> u.getUserName().equals(loggedInUserBean.getModel().getUsername())).findFirst().get());
         super.saveNewEntity();
     }
 

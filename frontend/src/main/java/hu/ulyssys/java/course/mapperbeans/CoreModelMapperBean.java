@@ -1,4 +1,4 @@
-package hu.ulyssys.java.course.util;
+package hu.ulyssys.java.course.mapperbeans;
 
 import hu.ulyssys.java.course.entity.AbstractProperty;
 import hu.ulyssys.java.course.entity.AppUserRole;
@@ -7,7 +7,6 @@ import hu.ulyssys.java.course.service.AppUserService;
 
 import javax.inject.Inject;
 import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class CoreModelMapperBean<M extends CoreRestModel, T extends AbstractProperty> {
@@ -20,22 +19,18 @@ public abstract class CoreModelMapperBean<M extends CoreRestModel, T extends Abs
         model.setId(entity.getId());
         model.setCreatedDate(entity.getCreatedDate());
         model.setModifiedDate(entity.getModifiedDate());
-        if (entity.getCreatedBy() != null){
-            model.setCreatedById(entity.getCreatedBy().getId());
+        if (entity.getCreatedUser() != null){
+            model.setCreatedUserById(entity.getCreatedUser().getId());
         }
-        if (entity.getModifiedBy() != null){
-            model.setModifiedById(entity.getModifiedBy().getId());
+        if (entity.getModifiedUser() != null){
+            model.setModifiedUserById(entity.getModifiedUser().getId());
         }
         return model;
     }
 
-    public List<M> createModelsFromList(List<T> entity) {
-        return entity.stream().map(this::createModelFromEntity).collect(Collectors.toList());
-    }
-
     public void populateEntityFromModel(T entity, M model) {
         entity.setModifiedDate(new Date(System.currentTimeMillis()));
-        entity.setModifiedBy(appUserService.getAll().stream().filter(appUser -> appUser.getRole().equals(AppUserRole.valueOf("ADMIN"))).collect(Collectors.toList()).get(0));
+        entity.setModifiedUser(appUserService.getAll().stream().filter(appUser -> appUser.getRole().equals(AppUserRole.valueOf("ADMIN"))).collect(Collectors.toList()).get(0));
     }
 
     public abstract M initNewModel();

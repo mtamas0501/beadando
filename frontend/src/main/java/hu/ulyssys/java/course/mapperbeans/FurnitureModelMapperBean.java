@@ -1,4 +1,4 @@
-package hu.ulyssys.java.course.util;
+package hu.ulyssys.java.course.mapperbeans;
 
 import hu.ulyssys.java.course.entity.Furniture;
 import hu.ulyssys.java.course.rest.model.FurnitureModel;

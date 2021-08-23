@@ -5,7 +5,7 @@ import hu.ulyssys.java.course.entity.AppUserRole;
 import hu.ulyssys.java.course.rest.model.CoreRestModel;
 import hu.ulyssys.java.course.service.AppUserService;
 import hu.ulyssys.java.course.service.CoreService;
-import hu.ulyssys.java.course.util.CoreModelMapperBean;
+import hu.ulyssys.java.course.mapperbeans.CoreModelMapperBean;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -53,7 +53,7 @@ public abstract class CoreRestService<T extends AbstractProperty, M extends Core
 
         T entity = initNewEntity();
         entity.setCreatedDate(new Date(System.currentTimeMillis()));
-        entity.setCreatedBy(appUserService.getAll().stream().filter(appUser -> appUser.getRole().equals(AppUserRole.valueOf("ADMIN"))).collect(Collectors.toList()).get(0));
+        entity.setCreatedUser(appUserService.getAll().stream().filter(appUser -> appUser.getRole().equals(AppUserRole.valueOf("ADMIN"))).collect(Collectors.toList()).get(0));
         populateEntityFromModel(entity, model);
 
         coreService.add(entity);
@@ -94,7 +94,6 @@ public abstract class CoreRestService<T extends AbstractProperty, M extends Core
         return modelMapperBean.createModelFromEntity(entity);
     }
 
-    //Generikus típus megszerzés, és reflection alapú objektum inicializálása
     protected T initNewEntity() {
 
         try {

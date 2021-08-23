@@ -1,8 +1,6 @@
 package hu.ulyssys.java.course.service.impl;
 
-import hu.ulyssys.java.course.dao.CourierDAO;
 import hu.ulyssys.java.course.dao.FurnitureDAO;
-import hu.ulyssys.java.course.entity.Courier;
 import hu.ulyssys.java.course.entity.Furniture;
 import hu.ulyssys.java.course.service.FurnitureService;
 

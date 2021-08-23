@@ -37,7 +37,7 @@
                 <p:column sortBy="#{user.createdDate}" filterBy="#{user.createdDate}" filterMatchMode="contains"
                           headerText="Létrehozás dátuma">
                     <h:outputText value="#{user.createdDate}">
-                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" timeZone="Europe/Budapest"/>
                     </h:outputText>
                 </p:column>
                 <p:column sortBy="#{user.role}" filterBy="#{user.role}" headerText="role"
@@ -68,11 +68,11 @@
                                 value="#{appUserCRUDMbean.selectedEntity.passwordHash}"/>
 
                     <p:outputLabel value="Role"/>
-                    <p:selectOneMenu value="#{registrationCRUDMbean.selectedEntity.role}" required="true"
+                    <p:selectOneMenu value="#{appUserCRUDMbean.selectedEntity.role}" required="true"
                                      requiredMessage="ROLE kötelező">
                         <f:selectItem itemValue="#{null}" itemLabel="Kérem válasszon"/>
                         <f:selectItem itemValue="ADMIN" itemLabel="Admin"/>
-                        <f:selectItem itemValue="USER" itemLabel="Sima felhasználó"/>
+                        <f:selectItem itemValue="USER" itemLabel="User"/>
                     </p:selectOneMenu>
 
                     <p:commandButton value="Mentés" icon="pi pi-save" actionListener="#{appUserCRUDMbean.save()}" validateClient="true"

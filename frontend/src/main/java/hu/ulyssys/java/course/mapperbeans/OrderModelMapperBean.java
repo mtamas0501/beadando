@@ -1,4 +1,4 @@
-package hu.ulyssys.java.course.util;
+package hu.ulyssys.java.course.mapperbeans;
 
 import hu.ulyssys.java.course.entity.AbstractEntity;
 import hu.ulyssys.java.course.entity.Order;
@@ -23,19 +23,19 @@ public class OrderModelMapperBean extends CoreModelMapperBean<OrderModel, Order>
     }
     @Override
     public OrderModel createModelFromEntity(Order entity) {
-        OrderModel furnitureModel = super.createModelFromEntity(entity);
-        furnitureModel.setDeliveredDate(entity.getDeliveredDate());
+        OrderModel orderModel = super.createModelFromEntity(entity);
+        orderModel.setDeliveredDate(entity.getDeliveredDate());
         if (entity.getCourier() != null) {
-            furnitureModel.setCourier(entity.getCourier().getId());
+            orderModel.setCourier(entity.getCourier().getId());
         }else {
-            furnitureModel.setCourier(null);
+            orderModel.setCourier(null);
         }
-        furnitureModel.setFurnitures(entity.getFurnitures().stream().map(AbstractEntity::getId).collect(Collectors.toList()));
-        furnitureModel.setSettlement(entity.getSettlement());
-        furnitureModel.setPublicSpace(entity.getPublicSpace());
-        furnitureModel.setNatureOfPublicSpace(entity.getNatureOfPublicSpace());
-        furnitureModel.setHouseNumber(entity.getHouseNumber());
-        return furnitureModel;
+        orderModel.setFurnitures(entity.getFurnitures().stream().map(AbstractEntity::getId).collect(Collectors.toList()));
+        orderModel.setSettlement(entity.getSettlement());
+        orderModel.setPublicSpace(entity.getPublicSpace());
+        orderModel.setNatureOfPublicSpace(entity.getNatureOfPublicSpace());
+        orderModel.setHouseNumber(entity.getHouseNumber());
+        return orderModel;
     }
 
     @Override

@@ -5,7 +5,6 @@ import hu.ulyssys.java.course.entity.AppUser;
 import hu.ulyssys.java.course.service.AppUserService;
 
 import javax.ejb.Stateless;
-import java.util.Date;
 
 @Stateless
 public class AppUserServiceImpl extends CoreServiceImpl<AppUser> implements AppUserService {

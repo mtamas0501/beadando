@@ -9,11 +9,11 @@
 <body>
 <ui:composition template="layout/mainTemplate.xhtml">
 
-    <ui:define name="title">Menu karbantartó</ui:define>
+    <ui:define name="title">Menü karbantartó</ui:define>
     <ui:define name="content">
         <h:form id="form" rendered="#{loggedInUserBean.isLoggedIn()}">
             <p:growl id="growl" showDetail="false"/>
-            <crud:crudFunctions id="crudFunctions" bean="#{menuItemCRUDMbean}" onCompleShowDialog="PF('menuDialog').show()"
+            <crud:crudFunctions id="crudFunctions" bean="#{menuItemCRUDMbean}" onCompleShowDialog="PF('menuItemDialog').show()"
                                 onCompleUpdate="@([id$=menuItemForm])" onRendered="true"/>
             <p:dataTable id="table" paginator="true" value="#{menuItemCRUDMbean.list}" var="menuItem"
                          selectionMode="single" selection="#{menuItemCRUDMbean.selectedEntity}" rowKey="#{menuItem.id}"
@@ -32,8 +32,8 @@
                 <p:column sortBy="#{menuItem.label}" filterBy="#{menuItem.label}" headerText="label" filterMatchMode="contains">
                     <h:outputText value="#{menuItem.label}"/>
                 </p:column>
-                <p:column sortBy="#{menuItem.onlyAdminCanSee}" filterBy="#{menuItem.onlyAdminCanSee}" headerText="Admin jogosúltság szükséges" filterMatchMode="contains">
-                    <h:outputText value="#{menuItem.onlyAdminCanSee}"/>
+                <p:column sortBy="#{menuItem.adminFunction}" filterBy="#{menuItem.adminFunction}" headerText="Admin jogosúltság szükséges" filterMatchMode="contains">
+                    <h:outputText value="#{menuItem.adminFunction}"/>
                 </p:column>
 
             </p:dataTable>
@@ -43,7 +43,7 @@
             </p:confirmDialog>
         </h:form>
 
-        <p:dialog id="menuDialog" widgetVar="menuDialog" header="Menü elem" modal="true" closable="true">
+        <p:dialog id="menuItemDialog" widgetVar="menuItemDialog" header="Menü elem" modal="true" closable="true">
             <h:form id="menuItemForm">
                 <p:panelGrid layout="grid" columns="2" id="formPanel" style="width: 400px">
                     <p:outputLabel value="Label"/>
@@ -52,14 +52,14 @@
 
                     <p:outputLabel value="URL"/>
                     <p:inputText value="#{menuItemCRUDMbean.selectedEntity.url}" required="true"
-                                 requiredMessage="URL kötelező"/>
+                                 requiredMessage="URL kötel ező"/>
 
                     <p:outputLabel value="Csak admin láthatja"/>
-                    <h:selectBooleanCheckbox value="#{menuItemCRUDMbean.selectedEntity.onlyAdminCanSee}" required="true"
+                    <h:selectBooleanCheckbox value="#{menuItemCRUDMbean.selectedEntity.adminFunction}" required="true"
                                              requiredMessage="Jogosultság megadás kötelező kötelező"/>
 
                     <p:commandButton value="Mentés" icon="pi pi-save" actionListener="#{menuItemCRUDMbean.save()}"
-                                     process="formPanel" update="@([id$=menuForm])"/>
+                                     process="formPanel" update="@([id$=menuItemForm])"/>
                 </p:panelGrid>
             </h:form>
         </p:dialog>

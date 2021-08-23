@@ -2,7 +2,7 @@ package hu.ulyssys.java.course.rest;
 
 import hu.ulyssys.java.course.entity.Courier;
 import hu.ulyssys.java.course.rest.model.CourierModel;
-import hu.ulyssys.java.course.util.CourierModelMapperBean;
+import hu.ulyssys.java.course.mapperbeans.CourierModelMapperBean;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;
