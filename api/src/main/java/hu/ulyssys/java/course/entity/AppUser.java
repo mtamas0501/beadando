@@ -1,36 +1,30 @@
 package hu.ulyssys.java.course.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import java.util.Date;
-import java.util.Objects;
 
-
-@NamedQuery(name = AppUser.FIND_BY_USERNAME, query = "select u from AppUser u where u.username=:username")
+@NamedQuery(name = AppUser.FIND_BY_USERNAME, query = "select u from AppUser u where u.userName=:username ")
 @Entity
-@Table
-public class AppUser extends AbstractEntity {
-    public static final String FIND_BY_USERNAME = "AppUser.findByUsername";
-    @Column(name = "created_date")
-    private Date createdDate;
-    @Column(name = "username", unique = true)
-    private String username;
+@Table(name = "appuser")
+public class AppUser extends AbstractEntity{
+
+    public static  final String FIND_BY_USERNAME = "AppUser.findByUsername";
+
+    @Column(name = "user_name", unique = true, nullable = false, length = 200)
+    private String userName;
+
     @Column(name = "password_hash")
     private String passwordHash;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     private AppUserRole role;
 
-    public static String getFindByUsername() {
-        return FIND_BY_USERNAME;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPasswordHash() {
@@ -49,11 +43,21 @@ public class AppUser extends AbstractEntity {
         this.role = role;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AppUser appUser = (AppUser) o;
+
+        if (getId() != null ? !getId().equals(appUser.getId()) : appUser.getId() != null) return false;
+        return userName != null ? userName.equals(appUser.userName) : appUser.userName == null;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+        return result;
     }
 }

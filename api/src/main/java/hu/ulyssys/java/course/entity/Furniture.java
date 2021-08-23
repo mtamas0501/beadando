@@ -2,24 +2,25 @@ package hu.ulyssys.java.course.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+@NamedQuery(name = Furniture.FIND_BY_USERNAME, query = "select u from Furniture u where u.name=:name ")
 @Entity
 @Table(name = "furniture")
-public class Furniture extends AbstractProperty{
+public class Furniture extends AbstractProperty {
 
-    //@Max(200)
-    @Column(name = "name")
+    public static  final String FIND_BY_USERNAME = "Pizza.findByUsername";
+
+    @Column(nullable = false, length = 200)
     private String name;
-    //@Max(500)
-    @Column(name = "description")
+
+    @Column(nullable = false, length = 500)
     private String description;
-    @Column(name = "price",nullable = false)
-    private Integer price;
+
+    @Column(nullable = false)
+    private int price;
 
     public String getName() {
         return name;
@@ -37,20 +38,20 @@ public class Furniture extends AbstractProperty{
         this.description = description;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Furniture)) return false;
         Furniture furniture = (Furniture) o;
-        return Objects.equals(name, furniture.name) && Objects.equals(description, furniture.description) && Objects.equals(price, furniture.price);
+        return price == furniture.price && Objects.equals(name, furniture.name) && Objects.equals(description, furniture.description);
     }
 
     @Override

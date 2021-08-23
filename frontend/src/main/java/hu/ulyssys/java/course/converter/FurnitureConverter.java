@@ -13,7 +13,6 @@ import javax.inject.Named;
 @Named
 @ApplicationScoped
 public class FurnitureConverter implements Converter {
-
     @Inject
     private FurnitureService furnitureService;
 
@@ -23,7 +22,8 @@ public class FurnitureConverter implements Converter {
         if (s == null) {
             return null;
         }
-        return furnitureService.findByName(s);
+        return furnitureService.findByUserName(s);
+
     }
 
     @Override

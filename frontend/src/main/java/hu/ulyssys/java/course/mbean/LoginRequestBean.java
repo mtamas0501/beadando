@@ -12,6 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
 import java.util.Date;
 
 @Named
@@ -28,30 +29,39 @@ public class LoginRequestBean {
     public void doLogin() {
 
         try {
-            AppUser appUser = userService.findByUsername(model.getUsername());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/xhtml/order.xhtml");
+            //Ha sikeres a login
+            AppUser appUser = userService.findByUserName(model.getUsername());
             if (appUser == null) {
-                throw new SecurityException("Nem létező felhasználó");
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hibás jelszó vagy felhasználónév", ""));
             }
             String hashedPassword = DigestUtils.sha512Hex(model.getPassword());
             if (!hashedPassword.equals(appUser.getPasswordHash())) {
-                throw new SecurityException("Nem megfelelő jelszó");
-
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hibás jelszó vagy felhasználónév", ""));
             }
             LoggedInUserModel loggedInUserModel = new LoggedInUserModel();
-            loggedInUserModel.setUsername(appUser.getUsername());
+            loggedInUserModel.setUsername(appUser.getUserName());
             loggedInUserModel.setId(appUser.getId());
             loggedInUserModel.setRole(appUser.getRole());
-            //loggedInUserModel.setCreatedDate(new Date());
-            loggedInUserModel.setCreatedDate(appUser.getCreatedDate());
             bean.setModel(loggedInUserModel);
             PrimeFaces.current().executeScript("PF('loginDialog').hide()");
+            PrimeFaces.current().executeScript("PF('registrationDialog').hide()");
+            //Akkor  sessionbe beállítjuk a usert reprezentáló modelt.
         } catch (Exception e) {
             e.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "sikertelen bejelentkezés", ""));
         }
+
+
     }
 
     public void doLogout() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/xhtml/registration.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "sikertelen kijelentkezés", ""));
+        }
         bean.setModel(null);
     }
 

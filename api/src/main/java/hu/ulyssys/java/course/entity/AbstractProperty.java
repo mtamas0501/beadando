@@ -1,35 +1,23 @@
 package hu.ulyssys.java.course.entity;
-
-
 import javax.persistence.*;
+import javax.validation.constraints.PastOrPresent;
 import java.util.Date;
 
 @MappedSuperclass
 public abstract class AbstractProperty extends AbstractEntity{
 
-
-    @Column(name = "created_date",nullable = false)
-    private Date createdDate;
+    @PastOrPresent
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "modified_date")
     private Date modifiedDate;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "creator_user_id")
-    private AppUser creatorUser;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "modifier_user_id")
-    private AppUser modifierUser;
 
+    @JoinColumn(name = "created_user_id")
+    @ManyToOne
+    private AppUser createdBy;
 
-    public AbstractProperty() {
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+    @JoinColumn(name = "modified_user_id")
+    @ManyToOne
+    private AppUser modifiedBy;
 
     public Date getModifiedDate() {
         return modifiedDate;
@@ -39,20 +27,19 @@ public abstract class AbstractProperty extends AbstractEntity{
         this.modifiedDate = modifiedDate;
     }
 
-
-    public AppUser getCreatorUser() {
-        return creatorUser;
+    public AppUser getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCreatorUser(AppUser creatorUser) {
-        this.creatorUser = creatorUser;
+    public void setCreatedBy(AppUser createdBy) {
+        this.createdBy = createdBy;
     }
 
-    public AppUser getModifierUser() {
-        return modifierUser;
+    public AppUser getModifiedBy() {
+        return modifiedBy;
     }
 
-    public void setModifierUser(AppUser modifierUser) {
-        this.modifierUser = modifierUser;
+    public void setModifiedBy(AppUser modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 }

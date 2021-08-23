@@ -10,9 +10,8 @@ import javax.ejb.Stateless;
 
 @Stateless
 public class FurnitureServiceImpl extends CoreServiceImpl<Furniture> implements FurnitureService {
-
     @Override
-    public Furniture findByName(String name) {
-        return ((FurnitureDAO) dao).findByName(name);
+    public Furniture findByUserName(String username) {
+        return ((FurnitureDAO) dao).findByUserName(username);
     }
 }

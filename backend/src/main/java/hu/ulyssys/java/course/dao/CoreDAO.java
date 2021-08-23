@@ -1,10 +1,8 @@
 package hu.ulyssys.java.course.dao;
 
-import hu.ulyssys.java.course.entity.AbstractEntity;
-
 import java.util.List;
 
-public interface CoreDAO<T extends AbstractEntity> {
+public interface CoreDAO<T> {
     List<T> findAll();
 
     T findById(Long id);

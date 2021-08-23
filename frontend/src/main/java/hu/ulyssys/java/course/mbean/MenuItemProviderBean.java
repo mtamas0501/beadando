@@ -20,6 +20,7 @@ public class MenuItemProviderBean {
     @Inject
     private LoggedInUserBean loggedInUserBean;
 
+
     public MenuModel getMenuModel() {
         DefaultMenuModel menuModel = new DefaultMenuModel();
         service.getAll().forEach(menuItem -> {
@@ -30,12 +31,10 @@ public class MenuItemProviderBean {
     }
 
     private void addMenuItem(DefaultMenuModel menuModel, MenuItem item) {
-
         DefaultMenuItem element = new DefaultMenuItem();
         element.setHref(item.getUrl());
         element.setValue(item.getLabel());
-        if (Boolean.FALSE.equals(item.getAdminFunction()) || item.getAdminFunction() == null || (Boolean.TRUE.equals(item.getAdminFunction())) && loggedInUserBean.isAdmin()) {
+        if(Boolean.FALSE.equals(item.getOnlyAdminCanSee()) || item.getOnlyAdminCanSee()==null || (Boolean.TRUE.equals(item.getOnlyAdminCanSee())) && loggedInUserBean.isAdmin())
             menuModel.getElements().add(element);
-        }
     }
 }

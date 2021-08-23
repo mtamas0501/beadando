@@ -5,30 +5,21 @@ import hu.ulyssys.java.course.entity.Courier;
 
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Stateless
 public class CourierDAOImpl extends CoreDAOImpl<Courier> implements CourierDAO {
 
-
     @Override
-    public Courier findByName(String name) {
-        //select f from Farmer f where fullname=name;
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Courier> criteriaQuery = criteriaBuilder.createQuery(Courier.class);
-        Root<Courier> root = criteriaQuery.from(Courier.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("firstName"), name));
-        TypedQuery<Courier> query = entityManager.createQuery(criteriaQuery);
-
-        //TypedQuery<Farmer> query = entityManager.createQuery("select f from Farmer f where f.fullName=:name", Farmer.class);
-        List<Courier> list = query.getResultList();
-        if (list.isEmpty()) {
+    public Courier findByUserName(String firstName, String lastName) {
+        TypedQuery<Courier> query = entityManager.createNamedQuery(Courier.FIND_BY_USERNAME, Courier.class);
+        query.setParameter("firstName", firstName);
+        query.setParameter("lastName", lastName);
+        List<Courier> courierList = query.getResultList();
+        if(courierList.isEmpty()){
             return null;
         }
-        return list.get(0);
+        return courierList.get(0);
     }
 
     @Override

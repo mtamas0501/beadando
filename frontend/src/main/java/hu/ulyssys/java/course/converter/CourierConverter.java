@@ -13,7 +13,6 @@ import javax.inject.Named;
 @Named
 @ApplicationScoped
 public class CourierConverter implements Converter {
-
     @Inject
     private CourierService courierService;
 
@@ -23,13 +22,15 @@ public class CourierConverter implements Converter {
         if (s == null) {
             return null;
         }
-        return courierService.findByName(s);
+        String[] names = s.split(" ");
+        return courierService.findByUserName(names[0], names[1]);
+
     }
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object o) {
         if (o instanceof Courier) {
-            return ((Courier) o).getFirstName();
+            return ((Courier) o).getFirstName()+" "+((Courier) o).getLastName();
         }
         if (o instanceof String) {
             return o.toString();

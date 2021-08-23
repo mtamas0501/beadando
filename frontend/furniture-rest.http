@@ -1,0 +1,40 @@
+GET http://localhost:8080/api/furniture
+Accept: application/json
+
+###
+
+POST http://localhost:8080/api/furniture
+Content-Type: application/json
+
+{
+  "createdById": 2,
+  "modifiedById": 2,
+  "createdDate": "2020-11-16T04:25:03Z",
+  "modifiedDate": "2020-11-16T04:25:03Z",
+  "description": "mömax bútor",
+  "name": "Mömax bútor",
+  "price": 1000000
+}
+
+###
+
+PUT http://localhost:8080/api/furniture
+Content-Type: application/json
+
+{
+  "id": 7,
+  "createdById": 9,
+  "modifiedById": 9,
+  "createdDate": "2020-12-16T04:25:03Z",
+  "modifiedDate": "2020-12-16T04:25:03Z",
+  "description": "put teszt",
+  "name": "Mömax teszt bútor (REST)",
+  "price": 10000123
+}
+
+###
+
+DELETE http://localhost:8080/api/furniture/7
+Accept: application/json
+
+###

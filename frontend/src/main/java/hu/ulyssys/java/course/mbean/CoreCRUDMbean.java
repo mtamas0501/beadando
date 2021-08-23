@@ -2,6 +2,7 @@ package hu.ulyssys.java.course.mbean;
 
 import hu.ulyssys.java.course.entity.AbstractEntity;
 import hu.ulyssys.java.course.entity.MenuItem;
+import hu.ulyssys.java.course.service.AppUserService;
 import hu.ulyssys.java.course.service.CoreService;
 import hu.ulyssys.java.course.service.CourierService;
 import org.primefaces.PrimeFaces;
@@ -10,13 +11,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public abstract class CoreCRUDMbean<T extends AbstractEntity> implements Serializable {
-    private List<T> list;
-    private T selectedEntity;
-
-    private T loginMember;
+    protected List<T> list;
+    protected T selectedEntity;
 
     protected CoreService<T> service;
 
@@ -33,35 +33,49 @@ public abstract class CoreCRUDMbean<T extends AbstractEntity> implements Seriali
     public void save() {
         try {
             if (selectedEntity.getId() == null) {
-                service.add(selectedEntity);
-                list = service.getAll();
-                selectedEntity = initNewEntity();
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sikeres mentés"));
+                saveNewEntity();
             } else {
-                service.update(selectedEntity);
-                list = service.getAll();
-                selectedEntity = initNewEntity();
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sikeres módosítás"));
+                updateEntity();
             }
             PrimeFaces.current().executeScript("PF('" + dialogName() + "').hide()");
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sikertelen hozzáadás", null));
-
+        }catch (Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sikertelen mentés/módosítás", null));
         }
+    }
+
+    protected void saveNewEntity(){
+        selectedEntity.setCreatedDate(getCurrentDate());
+        service.add(selectedEntity);
+        refreshData();
+        selectedEntity = initNewEntity();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sikeres mentés"));
+    }
+
+    protected void refreshData(){
+        setList(service.getAll());
+    }
+
+    protected void updateEntity(){
+        service.update(selectedEntity);
+        refreshData();
+        selectedEntity = initNewEntity();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sikeres módosítás"));
+    }
+
+    protected Date getCurrentDate(){
+        Date date = new Date(System.currentTimeMillis());
+        return date;
     }
 
 
     public void remove() {
         try {
             service.remove(selectedEntity);
-            list = service.getAll();
+            refreshData();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sikeres törlés"));
-        } catch (Exception e) {
+        }catch (Exception e){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sikertelen törlés", null));
-
         }
-
-
     }
 
     protected abstract String dialogName();

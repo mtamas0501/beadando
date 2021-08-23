@@ -2,66 +2,42 @@ package hu.ulyssys.java.course.entity;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "order_furniture")
-public class Order extends AbstractProperty{
+public class Order extends AbstractProperty {
 
-    @Column(name = "delivery_date",nullable = false)
-    private Date deliveryDate;
+    @Future
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "delivered_date", nullable = false)
+    private Date deliveredDate;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "courier_id", nullable = false)
+    @JoinColumn(name = "courier_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Courier courier;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    //@Min(value = 1)
-    private List<Furniture> furnitures  = new ArrayList<>();
+    @NotEmpty
+    @JoinColumn(name = "order_id")
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Furniture> furnitures = new ArrayList<>();
 
-    @Column(name = "settlement",nullable = false)
-    //@Max(value = 200)
+    @Column(name = "settlement", length = 200)
     private String settlement;
 
-    @Column(name = "public_place",nullable = false)
-    //@Max(value = 200)
-    private String publicPlace;
+    @Column(name = "public_space", length = 200)
+    private String publicSpace;
 
-    @Column(name = "public_place_type",nullable = false)
-    private String publicPlaceType;
+    @Column(name = "nature_of_public_space", length = 200)
+    private String natureOfPublicSpace;
 
-    @Column(name = "house_of_number",nullable = false)
-    //@Max(value = 200)
-    private String houseOfNumber;
-
-
-    public Date getDeliveryDate() {
-        return deliveryDate;
-    }
-
-    public void setDeliveryDate(Date deliveryDate) {
-        this.deliveryDate = deliveryDate;
-    }
-
-    public Courier getCourier() {
-       return courier;
-    }
-
-    public void setCourier(Courier courier) {
-       this.courier = courier;
-    }
-
-    public List<Furniture> getFurnitures() {
-        return furnitures;
-    }
-
-    public void setFurnitures(List<Furniture> furnitures) {
-        this.furnitures = furnitures;
-    }
+    @Column(name = "house_number", length = 200)
+    private String houseNumber;
 
     public String getSettlement() {
         return settlement;
@@ -71,27 +47,51 @@ public class Order extends AbstractProperty{
         this.settlement = settlement;
     }
 
-    public String getPublicPlace() {
-        return publicPlace;
+    public String getPublicSpace() {
+        return publicSpace;
     }
 
-    public void setPublicPlace(String publicPlace) {
-        this.publicPlace = publicPlace;
+    public void setPublicSpace(String publicSpace) {
+        this.publicSpace = publicSpace;
     }
 
-    public String getPublicPlaceType() {
-        return publicPlaceType;
+    public String getNatureOfPublicSpace() {
+        return natureOfPublicSpace;
     }
 
-    public void setPublicPlaceType(String publicPlaceType) {
-        this.publicPlaceType = publicPlaceType;
+    public void setNatureOfPublicSpace(String natureOfPublicSpace) {
+        this.natureOfPublicSpace = natureOfPublicSpace;
     }
 
-    public String getHouseOfNumber() {
-        return houseOfNumber;
+    public String getHouseNumber() {
+        return houseNumber;
     }
 
-    public void setHouseOfNumber(String houseOfNumber) {
-        this.houseOfNumber = houseOfNumber;
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public Date getDeliveredDate() {
+        return deliveredDate;
+    }
+
+    public void setDeliveredDate(Date deliveredDate) {
+        this.deliveredDate = deliveredDate;
+    }
+
+    public Courier getCourier() {
+        return courier;
+    }
+
+    public void setCourier(Courier courier) {
+        this.courier = courier;
+    }
+
+    public List<Furniture> getFurnitures() {
+        return furnitures;
+    }
+
+    public void setFurnitures(List<Furniture> furnitures) {
+        this.furnitures = furnitures;
     }
 }

@@ -1,13 +1,17 @@
 package hu.ulyssys.java.course.rest.model;
 
-import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class CourierModel extends CoreRestModel{
-    //@Max(value = 500)
+    @NotNull
+    @Size(max = 500)
     private String firstName;
-    //@Max(value = 500)
+    @NotNull
+    @Size(max = 500)
     private String lastName;
-    private Integer telephoneNumber;
+    @NotNull
+    private String phoneNumber;
 
     public String getFirstName() {
         return firstName;
@@ -25,11 +29,11 @@ public class CourierModel extends CoreRestModel{
         this.lastName = lastName;
     }
 
-    public Integer getTelephoneNumber() {
-        return telephoneNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelephoneNumber(Integer telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

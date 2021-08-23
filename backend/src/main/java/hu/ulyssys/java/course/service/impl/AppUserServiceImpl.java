@@ -10,8 +10,7 @@ import java.util.Date;
 @Stateless
 public class AppUserServiceImpl extends CoreServiceImpl<AppUser> implements AppUserService {
     @Override
-    public AppUser findByUsername(String username) {
-        return ((AppUserDAO)dao ).findByUsername(username);
+    public AppUser findByUserName(String username) {
+        return ((AppUserDAO) dao).findByUserName(username);
     }
-
 }

@@ -1,37 +1,48 @@
 package hu.ulyssys.java.course.mbean;
 
 import hu.ulyssys.java.course.entity.AbstractProperty;
-import hu.ulyssys.java.course.entity.Courier;
-import hu.ulyssys.java.course.entity.Furniture;
+import hu.ulyssys.java.course.entity.AppUser;
+import hu.ulyssys.java.course.service.AppUserService;
 import hu.ulyssys.java.course.service.CoreService;
-import hu.ulyssys.java.course.service.CourierService;
-import hu.ulyssys.java.course.service.FurnitureService;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.List;
 
-public abstract class AwareCRUDMbean<T extends AbstractProperty> extends CoreCRUDMbean<T> {
-    private List<Courier> courierList;
-    private List<Furniture> furnitureList;
+public abstract class AwareCRUDMbean<T extends AbstractProperty> extends CoreCRUDMbean<T>{
+    private List<AppUser> userList;
 
-    public AwareCRUDMbean(CoreService<T> service, CourierService courierService, FurnitureService furnitureService) {
+    protected LoggedInUserBean loggedInUserBean;
+
+    public AwareCRUDMbean(CoreService<T> service, AppUserService appUserService, LoggedInUserBean loggedInUserBean){
         super(service);
-        courierList = courierService.getAll();
-        furnitureList = furnitureService.getAll();
+        userList = appUserService.getAll();
+        this.loggedInUserBean =loggedInUserBean;
     }
 
-    public List<Courier> getCourierList() {
-        return courierList;
+    @Override
+    public void save() {
+        try {
+            selectedEntity.setModifiedDate(getCurrentDate());
+            selectedEntity.setModifiedBy(userList.stream().filter(u -> u.getUserName().equals(loggedInUserBean.getModel().getUsername())).findFirst().get());
+            super.save();
+        }catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hiba történt mentés közben", ""));
+            e.printStackTrace();
+        }
     }
 
-    public void setCourierList(List<Courier> courierList) {
-        this.courierList = courierList;
+    @Override
+    protected void saveNewEntity(){
+        selectedEntity.setCreatedBy(userList.stream().filter(u -> u.getUserName().equals(loggedInUserBean.getModel().getUsername())).findFirst().get());
+        super.saveNewEntity();
     }
 
-    public List<Furniture> getFurnitureList() {
-        return furnitureList;
+    public List<AppUser> getUserList() {
+        return userList;
     }
 
-    public void setFurnitureList(List<Furniture> furnitureList) {
-        this.furnitureList = furnitureList;
+    public void setUserList(List<AppUser> userList) {
+        this.userList = userList;
     }
 }

@@ -1,13 +1,8 @@
 package hu.ulyssys.java.course.service;
 
-import hu.ulyssys.java.course.entity.AbstractEntity;
-
-
-
 import java.util.List;
 
-
-public interface CoreService<T extends AbstractEntity> {
+public interface CoreService<T> {
     List<T> getAll();
 
     T findById(Long id);
@@ -17,5 +12,4 @@ public interface CoreService<T extends AbstractEntity> {
     void remove(T entity);
 
     void update(T entity);
-
 }

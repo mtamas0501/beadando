@@ -9,10 +9,8 @@ import javax.ejb.Stateless;
 
 @Stateless
 public class CourierServiceImpl extends CoreServiceImpl<Courier> implements CourierService {
-
     @Override
-    public Courier findByName(String name) {
-        return ((CourierDAO) dao).findByName(name);
+    public Courier findByUserName(String firstName, String lastName) {
+        return ((CourierDAO) dao).findByUserName(firstName, lastName);
     }
-
 }

@@ -9,13 +9,12 @@ import java.util.List;
 
 @Stateless
 public class AppUserDAOImpl extends CoreDAOImpl<AppUser> implements AppUserDAO {
-
     @Override
-    public AppUser findByUsername(String username) {
+    public AppUser findByUserName(String username) {
         TypedQuery<AppUser> query = entityManager.createNamedQuery(AppUser.FIND_BY_USERNAME, AppUser.class);
         query.setParameter("username", username);
         List<AppUser> appUserList = query.getResultList();
-        if (appUserList.isEmpty()) {
+        if(appUserList.isEmpty()){
             return null;
         }
         return appUserList.get(0);
@@ -26,3 +25,4 @@ public class AppUserDAOImpl extends CoreDAOImpl<AppUser> implements AppUserDAO {
         return AppUser.class;
     }
 }
+

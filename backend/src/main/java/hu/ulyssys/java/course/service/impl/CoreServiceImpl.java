@@ -39,5 +39,4 @@ public abstract class CoreServiceImpl<T extends AbstractEntity> implements CoreS
     public void update(T entity) {
         dao.update(entity);
     }
-
 }

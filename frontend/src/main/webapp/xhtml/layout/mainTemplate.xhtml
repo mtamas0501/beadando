@@ -12,37 +12,21 @@
 <h:body>
 
     <ui:insert name="menuBar">
-        <h:form id="menubarForm">
-            <!--hogyen kellene úgy model-el elkészíteni a menüt, hogy uygan így nézzen ki-->
-            <p:menubar model="#{menuItemProviderBean.getMenuModel()}">
+        <h:form id="menuForm" rendered="#{loggedInUserBean.isLoggedIn()}">
+            <p:menubar model="#{menuItemProviderBean.getMenuModel()}" rendered="#{loggedInUserBean.isLoggedIn()}">
                 <f:facet name="options">
-                    <p:commandButton rendered="#{!loggedInUserBean.isLoggedIn()}" oncomplete="PF('loginDialog').show()"
-                                     value="Login" icon="pi pi-fw pi-sign-in"
-                                     styleClass="ui-button-info"/>
                     <p:outputLabel rendered="#{loggedInUserBean.isLoggedIn()}"
                                    value="#{loggedInUserBean.model.username}"/>
 
                     <p:commandButton actionListener="#{loginRequestBean.doLogout()}" rendered="#{loggedInUserBean.isLoggedIn()}" value="Logout" icon="pi pi-fw pi-sign-out"
-                                     styleClass="ui-button-info" update="@form  @([id$=crudFunctionToolbar])"/>
+                                     styleClass="ui-button-info" update="@all"/>
                 </f:facet>
             </p:menubar>
         </h:form>
-        <p:dialog header="Login" modal="true" widgetVar="loginDialog" id="loginDialog">
-            <h:form>
-                <p:outputLabel value="Username"/>
-                <p:inputText value="#{loginRequestBean.model.username}"/>
-                <br/>
-                <p:outputLabel value="Password"/>
-                <p:password value="#{loginRequestBean.model.password}"/>
-
-                <p:separator/>
-                <p:commandButton value="Login" actionListener="#{loginRequestBean.doLogin}" update="@([id$=menubarForm])  @([id$=crudFunctionToolbar])"/>
-            </h:form>
-        </p:dialog>
     </ui:insert>
     <ui:insert name="content"/>
     <ui:insert name="footer">
-        Beadandó projekt ©
+        Bútor applikáció ©
     </ui:insert>
 </h:body>
 </html>

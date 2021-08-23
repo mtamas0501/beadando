@@ -5,6 +5,5 @@ import hu.ulyssys.java.course.entity.AppUser;
 
 
 public interface AppUserService extends CoreService<AppUser>{
-
-    AppUser findByUsername(String username);
+    AppUser findByUserName(String username);
 }

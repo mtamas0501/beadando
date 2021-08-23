@@ -1,24 +1,28 @@
 package hu.ulyssys.java.course.entity;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
+@NamedQuery(name = Courier.FIND_BY_USERNAME, query = "select u from Courier u where u.firstName=:firstName and u.lastName=:lastName ")
 @Entity
 @Table(name = "courier")
 public class Courier extends AbstractProperty {
 
-    @Column(name = "first_name",nullable = false)
-    //@Max(value = 500)
+    public static  final String FIND_BY_USERNAME = "Courier.findByUsername";
+
+    @Column(name = "first_name", nullable = false, length = 500)
     private String firstName;
-    @Column(name = "last_name",nullable = false)
-    //@Max(value = 500)
+
+    @Column(name = "last_name", nullable = false, length = 500)
     private String lastName;
-    @Column(name = "telephone_number",nullable = false)
-    private Integer telephoneNumber;
+
+    @Column(name = "phone_number", nullable = false)
+    @Pattern(message = "", regexp = "((\\+36)|(00)|(06))[0-9]{8}")
+    private String phoneNumber;
 
     public String getFirstName() {
         return firstName;
@@ -36,24 +40,24 @@ public class Courier extends AbstractProperty {
         this.lastName = lastName;
     }
 
-    public Integer getTelephoneNumber() {
-        return telephoneNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelephoneNumber(Integer telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Courier)) return false;
         Courier courier = (Courier) o;
-        return Objects.equals(firstName, courier.firstName) && Objects.equals(lastName, courier.lastName) && Objects.equals(telephoneNumber, courier.telephoneNumber);
+        return Objects.equals(firstName, courier.firstName) && Objects.equals(lastName, courier.lastName) && Objects.equals(phoneNumber, courier.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, telephoneNumber);
+        return Objects.hash(firstName, lastName, phoneNumber);
     }
 }

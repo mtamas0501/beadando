@@ -18,8 +18,8 @@ public class MenuItemCRUDMbean extends CoreCRUDMbean<MenuItem> implements Serial
     @Inject
     public MenuItemCRUDMbean(MenuItemService menuItemService, LoggedInUserBean loggedInUserBean) {
         super(menuItemService);
-        if (!loggedInUserBean.isAdmin()) {
-            throw new SecurityException("Nincs elég jogosultság");
+        if (!loggedInUserBean.isAdmin()){
+            throw new SecurityException("Nincs elég jogosúltságod!");
         }
     }
 

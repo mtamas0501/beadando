@@ -9,7 +9,6 @@ import javax.ejb.Stateless;
 
 @Stateless
 public class OrderDAOImpl extends CoreDAOImpl<Order> implements OrderDAO {
-
     @Override
     protected Class<Order> getManagedClass() {
         return Order.class;

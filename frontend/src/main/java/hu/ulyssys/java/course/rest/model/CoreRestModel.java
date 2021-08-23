@@ -1,15 +1,20 @@
 package hu.ulyssys.java.course.rest.model;
 
-import hu.ulyssys.java.course.entity.AppUser;
-
+import javax.validation.constraints.*;
 import java.util.Date;
 
 public abstract class CoreRestModel {
     private Long id;
+
+    @PastOrPresent
     private Date createdDate;
+
+    @PastOrPresent
     private Date modifiedDate;
-    private AppUser creatorUser;
-    private AppUser modifierUser;
+
+    private Long createdById;
+
+    private Long modifiedById;
 
     public Long getId() {
         return id;
@@ -35,19 +40,19 @@ public abstract class CoreRestModel {
         this.modifiedDate = modifiedDate;
     }
 
-    public AppUser getCreatorUser() {
-        return creatorUser;
+    public Long getCreatedById() {
+        return createdById;
     }
 
-    public void setCreatorUser(AppUser creatorUser) {
-        this.creatorUser = creatorUser;
+    public void setCreatedById(Long createdById) {
+        this.createdById = createdById;
     }
 
-    public AppUser getModifierUser() {
-        return modifierUser;
+    public Long getModifiedById() {
+        return modifiedById;
     }
 
-    public void setModifierUser(AppUser modifierUser) {
-        this.modifierUser = modifierUser;
+    public void setModifiedById(Long modifiedById) {
+        this.modifiedById = modifiedById;
     }
 }

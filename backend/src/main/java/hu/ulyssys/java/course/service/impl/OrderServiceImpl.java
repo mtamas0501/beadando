@@ -7,5 +7,4 @@ import javax.ejb.Stateless;
 
 @Stateless
 public class OrderServiceImpl extends CoreServiceImpl<Order> implements OrderService {
-
 }

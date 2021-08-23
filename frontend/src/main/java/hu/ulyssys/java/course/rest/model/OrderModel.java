@@ -1,50 +1,52 @@
 package hu.ulyssys.java.course.rest.model;
 
-import hu.ulyssys.java.course.entity.Courier;
-import hu.ulyssys.java.course.entity.Furniture;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+
 public class OrderModel extends CoreRestModel{
-
-    private Date deliveryDate;
-
-    private Courier courier;
-
-    private List<Furniture> furnitures = new ArrayList<>();
-
+    @Future
+    private Date deliveredDate;
+    private Long courier;
+    @NotEmpty
+    private List<Long> furnitures = new ArrayList<>();
+    @Size(max = 200)
     private String settlement;
+    @Size(max = 200)
+    private String publicSpace;
+    @Size(max = 200)
+    private String natureOfPublicSpace;
+    @Size(max = 200)
+    private String houseNumber;
 
-    private String publicPlace;
-
-    private String publicPlaceType;
-
-    private String houseOfNumber;
-
-    public Date getDeliveryDate() {
-        return deliveryDate;
+    public Date getDeliveredDate() {
+        return deliveredDate;
     }
 
-    public void setDeliveryDate(Date deliveryDate) {
-        this.deliveryDate = deliveryDate;
+    public void setDeliveredDate(Date deliveredDate) {
+        this.deliveredDate = deliveredDate;
     }
 
-    public Courier getCourier() {
+    public Long getCourier() {
         return courier;
     }
 
-    public void setCourier(Courier courier) {
+    public void setCourier(Long courier) {
         this.courier = courier;
     }
 
-    public List<Furniture> getFurnitures() {
+    public List<Long> getFurnitures() {
         return furnitures;
     }
 
-    public void setFurnitures(List<Furniture> furnitures) {
+    public void setFurnitures(List<Long> furnitures) {
         this.furnitures = furnitures;
     }
 
@@ -56,27 +58,27 @@ public class OrderModel extends CoreRestModel{
         this.settlement = settlement;
     }
 
-    public String getPublicPlace() {
-        return publicPlace;
+    public String getPublicSpace() {
+        return publicSpace;
     }
 
-    public void setPublicPlace(String publicPlace) {
-        this.publicPlace = publicPlace;
+    public void setPublicSpace(String publicSpace) {
+        this.publicSpace = publicSpace;
     }
 
-    public String getPublicPlaceType() {
-        return publicPlaceType;
+    public String getNatureOfPublicSpace() {
+        return natureOfPublicSpace;
     }
 
-    public void setPublicPlaceType(String publicPlaceType) {
-        this.publicPlaceType = publicPlaceType;
+    public void setNatureOfPublicSpace(String natureOfPublicSpace) {
+        this.natureOfPublicSpace = natureOfPublicSpace;
     }
 
-    public String getHouseOfNumber() {
-        return houseOfNumber;
+    public String getHouseNumber() {
+        return houseNumber;
     }
 
-    public void setHouseOfNumber(String houseOfNumber) {
-        this.houseOfNumber = houseOfNumber;
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
     }
 }
